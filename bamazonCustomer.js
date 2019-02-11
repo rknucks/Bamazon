@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 	user: 'root',
 
 	// Your password
-	password: "",
+	password: "UoP14@Ap84",
 	database: 'bamazon'
 });
 
@@ -57,11 +57,11 @@ function start(){
 		}
 		]).then(function(ans){
 		  var itemToBuy = (ans.id)-1;
-		  var ammountToBuy = parseInt(ans.qty);
-		  var total = parseFloat(((res[itemToBuy].price)*ammountToBuy).toFixed(2));
+		  var amountToBuy = parseInt(ans.qty);
+		  var total = parseFloat(((res[itemToBuy].price)*amountToBuy).toFixed(2));
 	
 		  //checks if enough items are in stock
-		  if(res[itemToBuy].stock_quantity >= ammountToBuy){
+		  if(res[itemToBuy].stock_quantity >= amountToBuy){
 			//updates quantity in Products
 			connection.query("UPDATE Products SET ? WHERE ?", [
 			{stock_quantity: (res[itemToBuy].stock_quantity - amountToBuy)},
@@ -69,7 +69,9 @@ function start(){
 			], function(err, result){
 				if(err) throw err;
 				console.log("Thanks for your purchase! Your total is $" + total.toFixed(2));
+			reprompt();
 			});
+			
 	
 			connection.query("SELECT * FROM Products", function(err, deptRes){
 			  if(err) throw err;
@@ -92,9 +94,10 @@ function start(){
 	
 		  } else{
 			console.log("We're sorry, there is an insufficient quantity of the item");
+			reprompt();
 		  }
 	
-		  reprompt();
+		  
 		})
 	})
 	}
