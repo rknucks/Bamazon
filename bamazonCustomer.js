@@ -71,7 +71,7 @@ function start(){
 				console.log("Thanks for your purchase! Your total is $" + total.toFixed(2));
 			});
 	
-			connection.query("SELECT * FROM Departments", function(err, deptRes){
+			connection.query("SELECT * FROM Products", function(err, deptRes){
 			  if(err) throw err;
 			  var index;
 			  for(var i = 0; i < deptRes.length; i++){
@@ -81,7 +81,7 @@ function start(){
 			  }
 			  
 			  
-			  connection.query("UPDATE Departments SET ? WHERE ?", [
+			  connection.query("UPDATE Products SET ? WHERE ?", [
 			  {TotalSales: deptRes[index].TotalSales + total},
 			  {department_name: res[itemToBuy].department_name}
 			  ], function(err, deptRes){
@@ -91,7 +91,7 @@ function start(){
 			});
 	
 		  } else{
-			console.log("We're sorry, we don't have that many in stock");
+			console.log("We're sorry, there is an insufficient quantity of the item");
 		  }
 	
 		  reprompt();
