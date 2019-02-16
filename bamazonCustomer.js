@@ -10,7 +10,7 @@ var connection = mysql.createConnection({
 	user: 'root',
 
 	// Your password
-	password: "UoP14@Ap84",
+	password: "root",
 	database: 'bamazon'
 });
 
@@ -80,26 +80,23 @@ function start(){
 				if(deptRes[i].department_name === res[itemToBuy].department_name){
 				  index = i;
 				}
-			  }
 			  
+			 else{
+				console.log("We're sorry, there is an insufficient quantity of the item");
+				reprompt();
+				}
+			}
 			  
-			  connection.query("UPDATE Products SET ? WHERE ?", [
-			  {TotalSales: deptRes[index].TotalSales + total},
-			  {department_name: res[itemToBuy].department_name}
-			  ], function(err, deptRes){
-				  if(err) throw err;
-				  
-			  });
 			});
 	
-		  } else{
-			console.log("We're sorry, there is an insufficient quantity of the item");
-			reprompt();
-		  }
+		 //} else{
+			//console.log("We're sorry, there is an insufficient quantity of the item");
+		//	reprompt();
+		  //}
 	
 		  
-		})
-	})
+		
+	
 	}
 	
 	//asks if they would like to purchase another item
@@ -114,7 +111,9 @@ function start(){
 		} else{
 		  console.log("See you soon!");
 		}
-	  });
+		});
 	}
+	});
+
 	
-	start();
+	 start();
