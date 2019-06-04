@@ -1,6 +1,6 @@
 # Bamazon
 **Check out the video demo:  https://drive.google.com/file/d/1LE39A88iJsCa9y7gMp4Qqc-1bPMLLyNw/view
-
+Using Node.js and MySql
 ## Getting Started
 
 - Clone repo.
